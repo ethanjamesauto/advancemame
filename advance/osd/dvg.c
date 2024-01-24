@@ -612,6 +612,7 @@ static int serial_read(void *buf, uint32_t size)
         result = read;
     }
 #else
+    sleep(2); // Give the DVG some time to respond, if needed. TODO: find a better way to do this.
     result = read(s_serial_fd, buf, size);
     if (result != (int)size) {
         log_std(("dvg: read error %d, expected %d\n", result, size));
